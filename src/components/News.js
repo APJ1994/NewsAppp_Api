@@ -10,8 +10,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
   const [totalResults, setTotalResults] = useState(0)
-  document.title=`${CapitalizeFirstLetter(props.category)}-React News App`;
-
+  
   
  const CapitalizeFirstLetter=(str)=>{
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -35,6 +34,7 @@ const UpdateNews=async()=>{
 }
 
 useEffect(() => {
+  document.title=`${CapitalizeFirstLetter(props.category)}-React News App`;
   UpdateNews();
 
 }, [])
@@ -80,8 +80,10 @@ useEffect(() => {
 
    const fetchMoreData=async()=>{
      
-      const url=`https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&page=${page}&apiKey=${props.apiKey}&page=1&pageSize=${props.pageSize}`;
+      const url=`https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&page=${page+1}&apiKey=${props.apiKey}&page=1&pageSize=${props.pageSize}`;
         // this.setState({loading:true})
+
+        setPage(page+1)
         let data=await fetch(url);
         let parseData=await data.json();
         setArticles(articles.concat(parseData.articles))
