@@ -93,7 +93,7 @@ useEffect(() => {
     return (
       <>      
       <div className="container my-3">
-        <h2>News App-Top Headings</h2>
+        <h2>News App-Top Headings</h2> 
        {loading && <Spinner/>}
        <InfiniteScroll
           dataLength={articles.length}
